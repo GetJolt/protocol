@@ -47,7 +47,6 @@ export type AuthResponse = z.infer<typeof authResponseSchema>;
 export const updateProfileBodySchema = z.object({
   displayName: trimmed(Limits.displayName.min, Limits.displayName.max).optional(),
   bio: z.string().max(Limits.bio).optional(),
-  avatarUrl: z.url().max(512).nullable().optional(),
 });
 export type UpdateProfileBody = z.infer<typeof updateProfileBodySchema>;
 

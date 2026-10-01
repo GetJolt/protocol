@@ -15,4 +15,10 @@ export const Limits = {
   bio: 190,
   password: { min: 8, max: 256 },
   typingIndicatorMs: 8000,
+  avatarBytes: 1024 * 1024,
+  avatarPixels: 1024,
 } as const;
+
+/** Image formats an instance accepts for avatars. Anything else, SVG in particular, is refused. */
+export const AVATAR_CONTENT_TYPES = ['image/png', 'image/jpeg', 'image/webp', 'image/gif'] as const;
+export type AvatarContentType = (typeof AVATAR_CONTENT_TYPES)[number];

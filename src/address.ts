@@ -1,4 +1,4 @@
-// Users are addressed as `handle@instance`, e.g. `alice@jolt.chat` or `bob@localhost:4001` in development.
+// Users are addressed as `handle@instance`, e.g. `alice@joltapp.org` or `bob@localhost:4001` in development.
 
 export const HANDLE_PATTERN = /^[a-z0-9_.-]{2,32}$/;
 export const INSTANCE_PATTERN =

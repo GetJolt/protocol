@@ -28,16 +28,16 @@ describe('snowflakes', () => {
 
 describe('addresses', () => {
   it('parses and normalizes', () => {
-    expect(parseAddress('Alice@Jolt.Chat')).toEqual({ handle: 'alice', instance: 'jolt.chat' });
+    expect(parseAddress('Alice@JoltApp.Org')).toEqual({ handle: 'alice', instance: 'joltapp.org' });
     expect(parseAddress('bob@localhost:4001')).toEqual({ handle: 'bob', instance: 'localhost:4001' });
     expect(formatAddress({ handle: 'a1', instance: 'x.y' })).toBe('a1@x.y');
   });
 
   it('rejects junk', () => {
     expect(parseAddress('nobody')).toBeNull();
-    expect(parseAddress('@jolt.chat')).toBeNull();
+    expect(parseAddress('@joltapp.org')).toBeNull();
     expect(parseAddress('a@bad_domain!')).toBeNull();
-    expect(isValidInstance('jolt.chat/evil')).toBe(false);
+    expect(isValidInstance('joltapp.org/evil')).toBe(false);
   });
 });
 

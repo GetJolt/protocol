@@ -1,0 +1,28 @@
+{
+  "name": "@jolt/protocol",
+  "version": "0.1.0",
+  "description": "Shared wire protocol, schemas, permissions and identity primitives for Jolt.",
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "dev": "tsc -p tsconfig.build.json --watch --preserveWatchOutput",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@noble/ed25519": "^3.2.0",
+    "zod": "^4.6.5"
+  }
+}

@@ -82,6 +82,20 @@ The first dispatch is `READY`, with the user, every guild snapshot and read stat
 
 Bitfields are sent as decimal strings. They resolve the same way Discord's do: the guild owner gets everything; otherwise the `@everyone` role (which shares the guild's id), then each of the member's roles, then channel overwrites in order: `@everyone`, all role overwrites merged, then the member's own. `ADMINISTRATOR` grants everything. `computeChannelPermissions` in `@getjolt/protocol` is the reference implementation, and clients and servers share it.
 
+## Timeline and ActivityPub
+
+The social side is handled entirely by the user's home instance. Clients read the timeline, post, like, repost and follow through `/api/v1` (`/timeline`, `/posts`, `/profiles`, `/notifications`, `/media`), and get `FEED_ITEM_CREATE`, `POST_UPDATE`, `POST_DELETE`, `NOTIFICATION_CREATE` and `RELATIONSHIP_UPDATE` over the gateway.
+
+Post content is `text` plus `facets`: ranges marked as a link, a mention or a hashtag, with offsets in UTF-16 code units. `detectFacets` and `segmentRichText` in this package find and split them. Clients never receive HTML.
+
+Between servers, the timeline is plain ActivityPub, so it works with Mastodon and the rest of the fediverse as well as with other Jolt instances:
+
+- Actors live at `/users/<id>`, found through WebFinger. Their keys are RSA for HTTP Signatures plus Ed25519 for object proofs.
+- Posts are `Note` objects at `/posts/<id>`. Visibility maps to Mastodon's addressing: public posts go to the Public collection, unlisted ones put it in `cc`, and followers-only posts leave it out.
+- Instances handle `Follow`, `Accept`, `Reject`, `Undo`, `Create`, `Update`, `Delete`, `Like` and `Announce`, and publish NodeInfo at `/nodeinfo/2.1`.
+
+Incoming HTML is turned into text and facets on arrival, and anything that isn't a link, mention or hashtag is dropped.
+
 ## Reserved for later
 
 `message.encryption` and `channel.e2ee` are reserved for MLS end-to-end encryption. Voice and video will be added as new channel types.

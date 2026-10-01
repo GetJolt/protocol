@@ -13,6 +13,7 @@ import type {
   Role,
   User,
 } from './entities.js';
+import type { LinkedAccount, Notification, Post, Relationship, TimelineItem } from './social.js';
 import { presenceStatusSchema } from './entities.js';
 
 export const HEARTBEAT_INTERVAL_MS = 30_000;
@@ -68,6 +69,14 @@ export interface GatewayEvents {
   PRESENCE_UPDATE: { userId: string; status: PresenceStatus };
   USER_UPDATE: User;
   READ_STATE_UPDATE: ReadState;
+  /** A new post or repost for the home timeline, from someone you follow or from you. */
+  FEED_ITEM_CREATE: TimelineItem;
+  /** A post changed: edited, or its counts or your like/repost state moved. */
+  POST_UPDATE: Post;
+  POST_DELETE: { id: string };
+  NOTIFICATION_CREATE: Notification;
+  RELATIONSHIP_UPDATE: Relationship;
+  LINKED_ACCOUNTS_UPDATE: LinkedAccount[];
 }
 export type GatewayEventName = keyof GatewayEvents;
 

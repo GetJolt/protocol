@@ -1,6 +1,6 @@
 {
   "name": "@getjolt/protocol",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "The Jolt wire protocol: schemas, permissions, IDs and federated identity, shared by servers and clients.",
   "keywords": [
     "jolt",

@@ -17,6 +17,13 @@ export const Limits = {
   typingIndicatorMs: 8000,
   avatarBytes: 1024 * 1024,
   avatarPixels: 1024,
+  postLength: 500,
+  postImages: 4,
+  postsPerPage: 30,
+  altText: 1500,
+  contentWarning: 200,
+  mediaBytes: 8 * 1024 * 1024,
+  mediaPixels: 4096,
 } as const;
 
 /** Image formats an instance accepts for avatars. Anything else, SVG in particular, is refused. */
